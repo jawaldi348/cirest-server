@@ -10,6 +10,7 @@ class Pengguna extends REST_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Mpengguna');
     }
     /**
      * Tambah pengguna baru
@@ -26,7 +27,8 @@ class Pengguna extends REST_Controller
     public function fetch_pengguna_get()
     {
         header("Access-Control-Allow-Origin: *");
-        $data = array('returned');
+        // $data = array('returned');
+        $data = $this->Mpengguna->fetch_all();
         $this->response($data);
     }
 }
