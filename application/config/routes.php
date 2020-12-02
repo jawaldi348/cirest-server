@@ -54,3 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['api'] = 'rest_server';
+
+// Route API pengguna
+$route['pengguna/tambah'] = 'pengguna/tambah_pengguna';
+$route['pengguna/fetch'] = 'pengguna/fetch_pengguna';
