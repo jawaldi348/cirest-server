@@ -63,8 +63,63 @@ class Pengguna extends REST_Controller
                 $this->response($message, REST_Controller::HTTP_OK);
             } else {
                 $message = [
-                    'status' => true,
+                    'status' => false,
                     'message' => 'Tidak bisa registrasi akun pengguna'
+                ];
+                $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+            }
+        }
+    }
+
+    /**
+     * User Login API
+     * ---------------------------
+     * @param: username or email
+     * @param: password
+     * ---------------------------
+     * @method: POST
+     * @link: pengguna/login
+     */
+    public function login_post()
+    {
+        header("Access-Control-Allow-Origin: *");
+        # XSS Filtering
+        $_POST = $this->security->xss_clean($_POST);
+
+        #Form Validation
+        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[100]');
+        if ($this->form_validation->run() == FALSE) {
+            // Form Validation Errors
+            $message = array(
+                'status' => false,
+                'error' => $this->form_validation->error_array(),
+                'message' => validation_errors()
+            );
+            // $this->response($message, 400);
+            $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+        } else {
+            // Load login function
+            $output = $this->Mpengguna->user_login($this->input->post('username'), $this->input->post('password'));
+            if (!empty($output) and $output != FALSE) {
+                $return_data = [
+                    'user_id' => $output->id,
+                    'fullname' => $output->fullname,
+                    'email' => $output->email,
+                    'created_at' => $output->created_at
+                ];
+                // Login berhasil
+                $message = [
+                    'status' => true,
+                    'data' => $return_data,
+                    'message' => "Login pengguna berhasil"
+                ];
+                $this->response($message, REST_Controller::HTTP_OK);
+            } else {
+                // Login gagal
+                $message = [
+                    'status' => false,
+                    'message' => 'Invalid username dan password'
                 ];
                 $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
             }
