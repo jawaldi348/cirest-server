@@ -61,3 +61,4 @@ $route['pengguna/fetch'] = 'pengguna/fetch_pengguna';
 
 
 $route['pengguna/registrasi'] = 'api/pengguna/registrasi';
+$route['pengguna/login'] = 'api/pengguna/login';
