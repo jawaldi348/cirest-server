@@ -49,8 +49,8 @@ class Pengguna extends REST_Controller
                 'email' => $this->input->post('email', TRUE),
                 'username' => $this->input->post('username', TRUE),
                 'password' => md5($this->input->post('password', TRUE)),
-                'created_at' => time(),
-                'updated_at' => time(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ];
             // Tambah data pengguna ke database
             $output = $this->Mpengguna->store_pengguna($insert_data);
