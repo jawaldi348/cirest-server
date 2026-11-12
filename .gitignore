@@ -1,31 +1,50 @@
-.DS_Store
+# Dependencies
+node_modules/
+vendor/
 
-application/cache/*
-!application/cache/index.html
+# Runtime cache
+__pycache__/
+*.pyc
+.venv/
+venv/
 
-application/logs/*
-!application/logs/index.html
+# Framework cache
+.next/
+.nuxt/
+.output/
+.cache/
+.parcel-cache/
+.turbo/
+bootstrap/cache/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
 
-!application/*/.htaccess
+# Package manager cache
+.yarn/
+.pnp.*
+.npm/
 
-composer.lock
-
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
-
-# IDE Files
-#-------------------------
-/nbproject/
-.idea/*
-
-## Sublime Text cache files
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
+# IDE / Editor (exclude sftp.json)
+/.idea/
+/.vscode/*
+!/.vscode/sftp.json
 *.sublime-workspace
 *.sublime-project
-/tests/tests/
-/tests/results/
+/nbproject/
+.vs/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Binaries / compiled
+*.o
+*.a
+*.so
+*.dylib
+*.wasm
+*.class
